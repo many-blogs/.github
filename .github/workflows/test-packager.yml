@@ -1,0 +1,32 @@
+name: Test packager
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js 24
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: packager/package-lock.json
+
+      - name: Install dependencies
+        working-directory: packager
+        run: npm ci --no-audit --no-fund
+
+      - name: Run packager tests
+        working-directory: packager
+        run: npm test
