@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "yaml": "2.9.1"
+  },
+  "description": "Package a Jekyll repo's posts and builder files into a versioned content tree for the many-blogs engine.",
+  "engines": {
+    "node": ">=20"
+  },
+  "name": "@many-blogs/jekyll-packager",
+  "private": true,
+  "scripts": {
+    "test": "node --test package.test.mjs"
+  },
+  "type": "module",
+  "version": "1.0.0"
+}
